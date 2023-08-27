@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+#  api:
+#    image: api:SNAPSHOT
+#    container_name: api
+#    build:
+#      context: .
+#    ports:
+#      - "5555:80"
+#    environment:
+#      ASPNETCORE_ENVIRONMENT: Docker
+#    depends_on:
+#      - database
+#    extra_hosts:
+#      - "host.docker.internal:172.17.0.1"
+  database:
+    image: postgres:alpine3.15
+    container_name: db
+    environment:
+      POSTGRES_PASSWORD: "Password#123"
+      POSTGRES_USER: lootManager
+      POSTGRES_DB: lootManager_db
+    ports:
+      - "5432:5432"
+
+networks:
+  manager-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.128.2.0/24
